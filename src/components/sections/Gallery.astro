@@ -1,0 +1,201 @@
+---
+const photos = [
+  {
+    src: "/images/gallery/foto-01.jpg",
+    alt: "Esmaltação em gel - arte em preto",
+  },
+  {
+    src: "/images/gallery/foto-02.jpeg",
+    alt: "Esmaltação em gel - nude natural",
+  },
+  {
+    src: "/images/gallery/foto-03.jpeg",
+    alt: "Esmaltação em gel - francesinha",
+  },
+  {
+    src: "/images/gallery/foto-04.jpeg",
+    alt: "Esmaltação em gel - lilás perolado",
+  },
+];
+---
+
+<section
+  id="galeria"
+  style="
+    padding-top: 100px;
+    padding-bottom: 50px;
+    padding-left: clamp(20px, 7vw, 100px);
+    padding-right: clamp(20px, 7vw, 100px);
+  "
+>
+  <h2
+    id="gallery-title"
+    style="
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 4.5rem;
+    "
+  >
+    Conheça minhas artes
+  </h2>
+
+  <div
+    style="
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+      max-width: 1167px;
+      margin: 0 auto;
+    "
+  >
+    <!-- Coluna Esquerda -->
+    <div
+      style="
+        flex: 607;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(50px, 6vw, 80px);
+      "
+    >
+      <!-- Foto 1 -->
+      <div
+        id="gallery-photo-1"
+        style="border-radius: 8px; overflow: hidden; aspect-ratio: 607/545;"
+      >
+        <img
+          src={photos[0].src}
+          alt={photos[0].alt}
+          loading="lazy"
+          decoding="async"
+          style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.6s ease;"
+          onmouseenter="this.style.transform='scale(1.03)';"
+          onmouseleave="this.style.transform='scale(1)';"
+        />
+      </div>
+
+      <!-- Foto 3 -->
+      <div
+        id="gallery-photo-3"
+        style="border-radius: 8px; overflow: hidden; aspect-ratio: 605/518;"
+      >
+        <img
+          src={photos[2].src}
+          alt={photos[2].alt}
+          loading="lazy"
+          decoding="async"
+          style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.6s ease;"
+          onmouseenter="this.style.transform='scale(1.03)';"
+          onmouseleave="this.style.transform='scale(1)';"
+        />
+      </div>
+    </div>
+
+    <!-- Coluna Direita -->
+    <div
+      style="
+        flex: 500;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(30px, 6vw, 80px);
+        padding-top: clamp(60px, 12vw, 140px);
+      "
+    >
+      <!-- Foto 2 -->
+      <div
+        id="gallery-photo-2"
+        style="border-radius: 8px; overflow: hidden; aspect-ratio: 500/640;"
+      >
+        <img
+          src={photos[1].src}
+          alt={photos[1].alt}
+          loading="lazy"
+          decoding="async"
+          style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.6s ease;"
+          onmouseenter="this.style.transform='scale(1.03)';"
+          onmouseleave="this.style.transform='scale(1)';"
+        />
+      </div>
+
+      <!-- Foto 4 -->
+      <div
+        id="gallery-photo-4"
+        style="border-radius: 8px; overflow: hidden; aspect-ratio: 500/428;"
+      >
+        <img
+          src={photos[3].src}
+          alt={photos[3].alt}
+          loading="lazy"
+          decoding="async"
+          style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.6s ease;"
+          onmouseenter="this.style.transform='scale(1.03)';"
+          onmouseleave="this.style.transform='scale(1)';"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap, ScrollTrigger } from '../../scripts/motion';
+
+  // Cada elemento entra com y + opacity conectado ao scroll (scrub)
+  // Ordem: título → foto-1 e foto-2 juntas (colunas diferentes) → foto-3 → foto-4
+  const items = [
+    {
+      selector: '#gallery-title',
+      from: { y: 50, opacity: 0 },
+      start: 'top 92%',
+      end: 'top 70%',
+    },
+    {
+      selector: '#gallery-photo-1',
+      from: { y: 90, opacity: 0, scale: 0.97 },
+      start: 'top 92%',
+      end: 'top 55%',
+    },
+    {
+      selector: '#gallery-photo-2',
+      from: { y: 90, opacity: 0, scale: 0.97 },
+      start: 'top 95%',
+      end: 'top 58%',
+    },
+    {
+      selector: '#gallery-photo-3',
+      from: { y: 90, opacity: 0, scale: 0.97 },
+      start: 'top 92%',
+      end: 'top 55%',
+    },
+    {
+      selector: '#gallery-photo-4',
+      from: { y: 90, opacity: 0, scale: 0.97 },
+      start: 'top 95%',
+      end: 'top 58%',
+    },
+  ];
+
+  items.forEach(({ selector, from, start, end }) => {
+    const el = document.querySelector<HTMLElement>(selector);
+    if (!el) return;
+
+    gsap.fromTo(
+      el,
+      { ...from },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start,
+          end,
+          scrub: 1.5,   // 1.5s de lag — sensação de peso, acompanha o scroll
+        },
+      }
+    );
+  });
+</script>

@@ -1,0 +1,102 @@
+/* ─── Fontes de Luxo ────────────────────────────────────────────────────── */
+
+/* Manrope — corpo e interface (deve vir primeiro, antes de @font-face) */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap');
+
+/* Libertinus Serif Display — titulação elegante */
+@font-face {
+  font-family: 'Libertinus Serif Display';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/libertinus-serif-display@latest/latin-400-normal.woff2) format('woff2');
+}
+
+
+@import "tailwindcss";
+
+/* ─── Tokens de Design ──────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    /* Cores */
+    --color-primary:        #1a1a1a;
+    --color-accent:         #cbb4a5;
+    --color-accent-hover:   #bc9f8f;
+    --color-beige:          #ddd0c1;
+    --color-beige-light:    #e8ddd0;
+    --color-background:     #ffffff;
+    --color-text:           #1a1a1a;
+    --color-text-muted:     #888888;
+
+    /* Famílias tipográficas */
+    --font-heading: 'Libertinus Serif Display', 'Georgia', serif;
+    --font-body:    'Manrope', 'Helvetica Neue', sans-serif;
+
+    /* Escala tipográfica (base 16px, razão 1.333 – editorial) */
+    --text-xs:   0.75rem;     /* 12px – labels, legendas */
+    --text-sm:   0.875rem;    /* 14px – botões, notas */
+    --text-base: 1rem;        /* 16px – corpo padrão */
+    --text-lg:   1.125rem;    /* 18px – subtítulos */
+    --text-xl:   1.333rem;    /* ~21px */
+    --text-2xl:  1.777rem;    /* ~28px */
+    --text-3xl:  2.369rem;    /* ~38px */
+    --text-4xl:  3.157rem;    /* ~50px – hero mobile */
+    --text-5xl:  4.209rem;    /* ~67px – hero desktop */
+    --text-6xl:  5.61rem;     /* ~90px – display max */
+
+    /* Espaçamento entre letras */
+    --tracking-tight:  -0.02em;
+    --tracking-normal:  0em;
+    --tracking-wide:    0.04em;
+    --tracking-widest:  0.2em;
+
+    /* Alturas de linha */
+    --leading-tight:  1.1;
+    --leading-snug:   1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.7;
+  }
+
+  /* ─── Resets tipográficos globais ─── */
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: var(--leading-normal);
+  }
+
+  /* ─── Hierarquia de títulos (display serif) ─── */
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--leading-snug);
+    color: var(--color-text);
+  }
+
+  /* Body e interface: Manrope */
+  p, span, a, li, label, input, button, blockquote {
+    font-family: var(--font-body);
+  }
+
+  /* Links padrão */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Seleção elegante */
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+}

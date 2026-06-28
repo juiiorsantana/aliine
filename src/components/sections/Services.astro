@@ -1,0 +1,678 @@
+---
+const procedimentos = [
+  {
+    title: "Esmaltação<br />em Gel",
+    price: "R$ 200",
+    image: "/images/gallery/foto-01.jpg",
+    alt: "Esmaltação em gel",
+    duration: "1h",
+    retorno: "Manutenção a cada 3 semanas",
+    description:
+      "Acabamento em gel de alta durabilidade, com brilho impecável que resiste ao dia a dia sem lascar.",
+  },
+  {
+    title: "Banho<br />em Gel",
+    price: "R$ 200",
+    image: "/images/gallery/foto-02.jpeg",
+    alt: "Banho em gel",
+    duration: "1h30",
+    retorno: "Manutenção a cada 3 semanas",
+    description:
+      "Camada de gel sobre a unha natural que adiciona resistência e um aspecto liso e uniforme.",
+  },
+  {
+    title: "Alongamento<br />em Gel",
+    price: "R$ 200",
+    image: "/images/gallery/foto-03.jpeg",
+    alt: "Alongamento em gel",
+    duration: "2h30",
+    retorno: "Manutenção a cada 3 a 4 semanas",
+    description:
+      "Extensão das unhas com gel para comprimento e formato sob medida, com toque natural e leveza.",
+  },
+  {
+    title: "Manutenção",
+    price: "R$ 200",
+    image: "/images/gallery/foto-04.jpeg",
+    alt: "Manutenção",
+    duration: "1h30",
+    retorno: "Recomendada a cada 3 semanas",
+    description:
+      "Renovação do crescimento e do acabamento, preservando a saúde e a beleza das suas unhas.",
+  },
+];
+---
+
+<section id="procedimentos" class="proc-section">
+  <div class="proc-inner">
+    <!-- Cabeçalho -->
+    <div class="proc-head">
+      <span class="proc-eyebrow">Procedimentos</span>
+      <h2 class="proc-title">
+        Cuidados que realçam<br />sua essência.
+      </h2>
+      <div class="proc-ornament" aria-hidden="true">
+        <span></span>
+        <svg viewBox="0 0 16 16" width="12" height="12"
+          ><path d="M8 0l3 5 5 3-5 3-3 5-3-5-5-3 5-3z" fill="currentColor"
+          ></path></svg
+        >
+        <span></span>
+      </div>
+    </div>
+
+    <!-- Grid de cards / Carrossel no mobile -->
+    <ul class="proc-grid" id="proc-carousel">
+      {
+        procedimentos.map((p) => (
+          <li class="proc-card">
+            <div class="proc-card-inner">
+              {/* ── Frente ── */}
+              <div class="proc-card-front">
+                <div class="proc-card-media">
+                  <img
+                    src={p.image}
+                    alt={p.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="proc-badge" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="18"
+                      height="18"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M9 3h6l-1 7a2 2 0 0 1-2 2 2 2 0 0 1-2-2L9 3z" />
+                      <path d="M10 21h4M12 12v9" />
+                    </svg>
+                  </span>
+                </div>
+
+                <div class="proc-card-body">
+                  <h3 class="proc-card-title" set:html={p.title} />
+                  <div class="proc-card-foot">
+                    <span class="proc-card-price">{p.price}</span>
+                    <button
+                      type="button"
+                      class="proc-card-cta proc-flip"
+                      aria-expanded="false"
+                      aria-label={`Ver detalhes de ${p.alt}`}
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* ── Verso ── */}
+              <div class="proc-card-back">
+                <button
+                  type="button"
+                  class="proc-back-return"
+                  aria-label="Voltar ao card"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M19 12H5M11 18l-6-6 6-6" />
+                  </svg>
+                </button>
+
+                <h3 class="proc-back-title" set:html={p.title} />
+
+                <ul class="proc-back-list">
+                  <li class="proc-back-row">
+                    <span class="proc-back-label">Duração</span>
+                    <span class="proc-back-value">{p.duration}</span>
+                  </li>
+                  <li class="proc-back-row">
+                    <span class="proc-back-label">Retorno</span>
+                    <span class="proc-back-value">{p.retorno}</span>
+                  </li>
+                </ul>
+
+                <p class="proc-back-desc">{p.description}</p>
+
+                <a
+                  href="#contato"
+                  class="proc-back-cta"
+                  aria-label={`Agendar ${p.alt}`}
+                >
+                  Agendar
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Navegação do carrossel (somente mobile) -->
+    <div class="proc-carousel-nav" aria-hidden="true">
+      <button class="proc-nav-btn" id="proc-prev" aria-label="Card anterior">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <div class="proc-dots">
+        {procedimentos.map((_, i) => (
+          <button
+            class={`proc-dot${i === 0 ? " active" : ""}`}
+            data-index={i}
+            aria-label={`Card ${i + 1}`}
+          ></button>
+        ))}
+      </div>
+      <button class="proc-nav-btn" id="proc-next" aria-label="Próximo card">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proc-section {
+    position: relative;
+    background-color: var(--color-background, #ffffff);
+    min-height: 100vh;
+    padding: 6rem 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+  .proc-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("/images/spa/spa-banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    opacity: 0.75;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .proc-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  /* ── Cabeçalho ── */
+  .proc-head {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .proc-eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--color-accent, #cbb4a5);
+    margin-bottom: 1.1rem;
+  }
+  .proc-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 3.4vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--color-text, #1a1a1a);
+  }
+  .proc-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    color: var(--color-accent, #cbb4a5);
+  }
+  .proc-ornament span {
+    width: 38px;
+    height: 1px;
+    background-color: var(--color-accent, #cbb4a5);
+    opacity: 0.6;
+  }
+
+  /* ── Grid (desktop) ── */
+  .proc-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+
+  /* Card = container de perspectiva 3D com altura definida */
+  .proc-card {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    perspective: 1400px;
+    transition: transform 0.3s ease;
+  }
+  .proc-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .proc-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  .proc-card.is-flipped .proc-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Faces */
+  .proc-card-front,
+  .proc-card-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    box-shadow: 0 10px 30px rgba(26, 26, 26, 0.12);
+  }
+
+  /* ── Frente ── */
+  .proc-card-front {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+  }
+  .proc-card:hover .proc-card-front {
+    box-shadow: 0 16px 40px rgba(26, 26, 26, 0.18);
+  }
+
+  .proc-card-media {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .proc-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s ease;
+  }
+  .proc-card:hover .proc-card-media img {
+    transform: scale(1.05);
+  }
+  .proc-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--color-accent, #cbb4a5);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Corpo da frente — glassmorphism */
+  .proc-card-body {
+    position: relative;
+    overflow: hidden;
+    padding: 1.25rem 1.25rem 1.4rem;
+    background: rgba(255, 255, 255, 0.72);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  /* Textura de ruído (noise) sutil sobre o glass */
+  .proc-card-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='procNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23procNoise)'/%3E%3C/svg%3E");
+    opacity: 0.07;
+    pointer-events: none;
+  }
+  .proc-card-title {
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: var(--color-text, #1a1a1a);
+    margin: 0 0 1.1rem;
+  }
+  .proc-card-foot {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .proc-card-price {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text, #1a1a1a);
+  }
+  .proc-card-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-accent, #cbb4a5);
+    background: transparent;
+    color: var(--color-accent, #cbb4a5);
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease,
+      transform 0.3s ease;
+  }
+  .proc-card-cta:hover {
+    background-color: var(--color-accent, #cbb4a5);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  /* ── Verso — glassmorphism ── */
+  .proc-card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem 1.35rem 1.35rem;
+    background: rgba(255, 255, 255, 0.58);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  .proc-back-return {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-accent, #cbb4a5);
+    background: rgba(255, 255, 255, 0.4);
+    color: var(--color-accent, #cbb4a5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+  .proc-back-return:hover {
+    background-color: var(--color-accent, #cbb4a5);
+    color: #ffffff;
+  }
+  .proc-back-title {
+    font-family: var(--font-heading);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: var(--color-text, #1a1a1a);
+    margin: 0 2.5rem 1rem 0;
+  }
+  .proc-back-list {
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .proc-back-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+  }
+  .proc-back-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .proc-back-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent, #cbb4a5);
+  }
+  .proc-back-value {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text, #1a1a1a);
+  }
+  .proc-back-desc {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--color-text, #1a1a1a);
+    margin: 0 0 1.25rem;
+  }
+  .proc-back-cta {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1rem;
+    border-radius: 999px;
+    background-color: var(--color-accent, #cbb4a5);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+  .proc-back-cta:hover {
+    background-color: var(--color-accent-hover, #bc9f8f);
+    transform: translateY(-2px);
+  }
+
+  /* Nav do carrossel — oculto no desktop */
+  .proc-carousel-nav {
+    display: none;
+  }
+
+  /* ── Tablet ── */
+  @media (max-width: 900px) {
+    .proc-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  /* ── Mobile: carrossel ── */
+  @media (max-width: 520px) {
+    .proc-section {
+      height: 100vh;
+      height: 100dvh;
+      min-height: unset;
+      padding: 3rem 0 2rem;
+      flex-direction: column;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    /* iOS Safari: background-attachment fixed não funciona — usa scroll */
+    .proc-section::before {
+      background-attachment: scroll;
+    }
+
+    .proc-inner {
+      flex: 1;
+      min-height: 0;
+      max-width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .proc-head {
+      padding: 0 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Grid vira flex horizontal com scroll-snap */
+    .proc-grid {
+      display: flex;
+      grid-template-columns: unset;
+      flex: 1;
+      min-height: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 1rem;
+      padding: 0 1.5rem;
+      align-items: stretch;
+    }
+    .proc-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .proc-card {
+      flex: 0 0 calc(100vw - 3rem);
+      aspect-ratio: unset;
+      height: auto;
+      scroll-snap-align: start;
+    }
+  }
+</style>
+
+<script>
+  // ── Flip dos cards ──
+  document.querySelectorAll<HTMLButtonElement>(".proc-flip").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".proc-card");
+      if (!card) return;
+      const flipped = card.classList.toggle("is-flipped");
+      btn.setAttribute("aria-expanded", String(flipped));
+    });
+  });
+
+  document
+    .querySelectorAll<HTMLButtonElement>(".proc-back-return")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const card = btn.closest(".proc-card");
+        if (!card) return;
+        card.classList.remove("is-flipped");
+        card
+          .querySelector(".proc-flip")
+          ?.setAttribute("aria-expanded", "false");
+      });
+    });
+
+  // ── Carrossel (mobile) ──
+  const carousel = document.getElementById(
+    "proc-carousel",
+  ) as HTMLUListElement | null;
+  if (carousel) {
+    const cards = Array.from(
+      carousel.querySelectorAll<HTMLElement>(".proc-card"),
+    );
+    const dots = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(".proc-dot"),
+    );
+
+    function cardWidth(): number {
+      return (cards[0]?.offsetWidth ?? 0) + 16; // 16px = gap de 1rem
+    }
+
+    function currentIndex(): number {
+      return Math.round(carousel!.scrollLeft / cardWidth());
+    }
+
+    function syncDots() {
+      const idx = currentIndex();
+      dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+    }
+
+    carousel.addEventListener("scroll", syncDots, { passive: true });
+
+    document.getElementById("proc-prev")?.addEventListener("click", () => {
+      carousel.scrollBy({ left: -cardWidth(), behavior: "smooth" });
+    });
+
+    document.getElementById("proc-next")?.addEventListener("click", () => {
+      carousel.scrollBy({ left: cardWidth(), behavior: "smooth" });
+    });
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        carousel.scrollTo({ left: i * cardWidth(), behavior: "smooth" });
+      });
+    });
+  }
+</script>

@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Aliine Souza Nail Design',
+  description = 'Especialista em esmaltação em gel de alto padrão em Cuiabá-MT',
+} = Astro.props;
+---
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preconnect para Google Fonts (Manrope) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preconnect para Fontsource CDN (Libertinus Serif Display) -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/motion';
+    </script>
+  </body>
+</html>
