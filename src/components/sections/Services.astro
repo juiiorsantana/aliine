@@ -1,40 +1,40 @@
 ---
 const procedimentos = [
   {
-    title: "Esmaltação<br />em Gel",
-    price: "R$ 200",
+    title: "Alongamento<br />em Gel",
+    price: "R$ 300",
     image: "/images/gallery/foto-01.jpg",
-    alt: "Esmaltação em gel",
-    duration: "1h",
-    retorno: "Manutenção a cada 3 semanas",
+    alt: "Alongamento em gel",
+    duration: "2h",
+    retorno: "Manutenção a cada 3 a 4 semanas",
     description:
-      "Acabamento em gel de alta durabilidade, com brilho impecável que resiste ao dia a dia sem lascar.",
+      "Extensão das unhas com gel para comprimento e formato sob medida, com toque natural e leveza.",
   },
   {
     title: "Banho<br />em Gel",
     price: "R$ 200",
     image: "/images/gallery/foto-02.jpeg",
     alt: "Banho em gel",
-    duration: "1h30",
+    duration: "2h",
     retorno: "Manutenção a cada 3 semanas",
     description:
       "Camada de gel sobre a unha natural que adiciona resistência e um aspecto liso e uniforme.",
   },
   {
-    title: "Alongamento<br />em Gel",
-    price: "R$ 200",
+    title: "Esmaltação<br />em Gel",
+    price: "R$ 150",
     image: "/images/gallery/foto-03.jpeg",
-    alt: "Alongamento em gel",
-    duration: "2h30",
-    retorno: "Manutenção a cada 3 a 4 semanas",
+    alt: "Esmaltação em gel",
+    duration: "1h",
+    retorno: "Manutenção a cada 2 a 3 semanas",
     description:
-      "Extensão das unhas com gel para comprimento e formato sob medida, com toque natural e leveza.",
+      "Acabamento em gel de alta durabilidade, com brilho impecável que resiste ao dia a dia sem lascar.",
   },
   {
-    title: "Manutenção",
+    title: "Manutenção<br />em Unha de Gel",
     price: "R$ 200",
     image: "/images/gallery/foto-04.jpeg",
-    alt: "Manutenção",
+    alt: "Manutenção em unha de gel",
     duration: "1h30",
     retorno: "Recomendada a cada 3 semanas",
     description:
@@ -158,10 +158,11 @@ const procedimentos = [
 
                 <a
                   href="#contato"
-                  class="proc-back-cta"
+                  class="btn btn--primary btn--sm"
+                  style="margin-top:auto"
                   aria-label={`Agendar ${p.alt}`}
                 >
-                  Agendar
+                  <span>Agendar</span>
                   <svg
                     viewBox="0 0 24 24"
                     width="16"
@@ -185,22 +186,42 @@ const procedimentos = [
     <!-- Navegação do carrossel (somente mobile) -->
     <div class="proc-carousel-nav" aria-hidden="true">
       <button class="proc-nav-btn" id="proc-prev" aria-label="Card anterior">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 18l-6-6 6-6" />
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M15 18l-6-6 6-6"></path>
         </svg>
       </button>
       <div class="proc-dots">
-        {procedimentos.map((_, i) => (
-          <button
-            class={`proc-dot${i === 0 ? " active" : ""}`}
-            data-index={i}
-            aria-label={`Card ${i + 1}`}
-          ></button>
-        ))}
+        {
+          procedimentos.map((_, i) => (
+            <button
+              class={`proc-dot${i === 0 ? " active" : ""}`}
+              data-index={i}
+              aria-label={`Card ${i + 1}`}
+            />
+          ))
+        }
       </div>
       <button class="proc-nav-btn" id="proc-next" aria-label="Próximo card">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 6l6 6-6 6" />
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9 6l6 6-6 6"></path>
         </svg>
       </button>
     </div>
@@ -519,30 +540,6 @@ const procedimentos = [
     color: var(--color-text, #1a1a1a);
     margin: 0 0 1.25rem;
   }
-  .proc-back-cta {
-    margin-top: auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1rem;
-    border-radius: 999px;
-    background-color: var(--color-accent, #cbb4a5);
-    color: #ffffff;
-    font-family: var(--font-body);
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    transition:
-      background-color 0.3s ease,
-      transform 0.3s ease;
-  }
-  .proc-back-cta:hover {
-    background-color: var(--color-accent-hover, #bc9f8f);
-    transform: translateY(-2px);
-  }
-
   /* Nav do carrossel — oculto no desktop */
   .proc-carousel-nav {
     display: none;
@@ -646,6 +643,22 @@ const procedimentos = [
     .proc-card.is-flipped .proc-card-back {
       opacity: 1;
       pointer-events: auto;
+    }
+
+    /* ── Remove o glassmorphism no mobile ──
+       backdrop-filter: blur() falha em algumas versões de iOS (verso
+       renderiza preto/borrado). Fundo branco sólido renderiza igual em
+       todos os aparelhos. O vidro continua valendo no desktop. */
+    .proc-card-body {
+      background: rgba(255, 255, 255, 0.92);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    .proc-card-back {
+      background: #ffffff;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-color: rgba(203, 180, 165, 0.5);
     }
   }
 </style>

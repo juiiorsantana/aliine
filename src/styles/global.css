@@ -100,3 +100,154 @@
     color: #ffffff;
   }
 }
+
+/* ─── Sistema de Botões Premium ─────────────────────────────────────────── */
+/* Uso:
+   <a class="btn btn--primary"><span>Agendar horário</span></a>   → sólido taupe c/ sheen
+   <a class="btn btn--ghost"><span>Como chegar</span> <svg.../></a> → contorno
+   Modificador .btn--sm para versões compactas (ex.: navbar).
+   SEMPRE envolva o texto em <span> para que o brilho passe por cima sem lavá-lo. */
+@layer components {
+  .btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 1rem 2.25rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      background-color 0.35s ease,
+      color 0.35s ease,
+      border-color 0.35s ease;
+  }
+  /* Conteúdo acima do reflexo */
+  .btn > * {
+    position: relative;
+    z-index: 2;
+  }
+  .btn svg {
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Sheen — reflexo diagonal que varre da esquerda à direita no hover */
+  .btn::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    z-index: 1;
+    pointer-events: none;
+    transform: skewX(-18deg);
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.12) 30%,
+      rgba(255, 255, 255, 0.55) 50%,
+      rgba(255, 255, 255, 0.12) 70%,
+      transparent 100%
+    );
+    transition: left 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn:hover::before,
+  .btn:focus-visible::before {
+    left: 130%;
+  }
+
+  /* ── Primário — taupe sólido ── */
+  .btn--primary {
+    color: #ffffff;
+    background-color: var(--color-accent);
+    box-shadow:
+      0 4px 14px rgba(188, 159, 143, 0.35),
+      0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+  .btn--primary:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow:
+      0 14px 32px rgba(188, 159, 143, 0.55),
+      0 4px 10px rgba(0, 0, 0, 0.06);
+  }
+  .btn--primary:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(188, 159, 143, 0.4);
+  }
+  .btn--primary:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* ── Ghost — contorno que preenche ── */
+  .btn--ghost {
+    color: var(--color-accent);
+    background-color: transparent;
+    border-color: var(--color-accent);
+  }
+  .btn--ghost::before {
+    background: linear-gradient(
+      100deg,
+      transparent 0%,
+      rgba(203, 180, 165, 0.25) 50%,
+      transparent 100%
+    );
+  }
+  .btn--ghost:hover {
+    color: #ffffff;
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(188, 159, 143, 0.45);
+  }
+  .btn--ghost:active {
+    transform: translateY(0);
+  }
+  .btn--ghost:hover svg {
+    transform: translateX(3px);
+  }
+
+  /* ── Tamanho compacto (navbar / espaços reduzidos) ── */
+  .btn--sm {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    border-radius: 8px;
+  }
+
+  /* ── Foco acessível ── */
+  .btn:focus-visible {
+    outline: 2px solid var(--color-accent-hover);
+    outline-offset: 3px;
+  }
+
+  /* ── Movimento reduzido ── */
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn svg {
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .btn::before {
+      display: none;
+    }
+    .btn--primary:hover,
+    .btn--ghost:hover {
+      transform: none;
+    }
+  }
+}

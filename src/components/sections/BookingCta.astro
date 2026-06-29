@@ -1,0 +1,362 @@
+---
+// CTA final — convite ao agendamento
+const infos = [
+  { label: "Atendimento", value: "Com hora marcada" },
+  { label: "Local", value: "Cuiabá - MT" },
+  { label: "Resposta", value: "Rápida pelo WhatsApp" },
+];
+---
+
+<section class="booking-cta" id="agendar">
+  <div class="booking-cta__inner" data-reveal>
+    <!-- Eyebrow / tag de luxo -->
+    <span class="booking-cta__eyebrow">Agendamento</span>
+
+    <!-- Título -->
+    <h2 class="booking-cta__title">
+      Agende seu horário
+    </h2>
+
+    <!-- Divisor ornamental -->
+    <div class="booking-cta__ornament" aria-hidden="true">
+      <span></span>
+      <svg viewBox="0 0 16 16" width="11" height="11">
+        <path d="M8 0l3 5 5 3-5 3-3 5-3-5-5-3 5-3z" fill="currentColor"></path>
+      </svg>
+      <span></span>
+    </div>
+
+    <!-- Subtexto -->
+    <p class="booking-cta__text">
+      Você merece um tempo de cuidado, relaxamento<br class="hidden md:inline" />
+      e de estar sempre com as <span>unhas lindas!</span>
+    </p>
+
+    <!-- Botão + card lado a lado (no desktop) -->
+    <div class="booking-cta__actions">
+      <a class="btn btn--primary" href="#contato">
+        <svg
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+          <path d="M16 2v4M8 2v4M3 10h18"></path>
+        </svg>
+        <span>Verificar Horário</span>
+      </a>
+
+      <!-- Card de vidro com informações rotativas -->
+      <div class="booking-cta__glass" aria-live="polite">
+        <div class="booking-cta__slides">
+          {
+            infos.map((info, i) => (
+              <div class={`booking-cta__slide${i === 0 ? " is-active" : ""}`}>
+                <span class="booking-cta__info-label">{info.label}</span>
+                <span class="booking-cta__info-value">{info.value}</span>
+              </div>
+            ))
+          }
+        </div>
+        <div class="booking-cta__dots" aria-hidden="true">
+          {
+            infos.map((_, i) => (
+              <span class={`booking-cta__dot${i === 0 ? " is-active" : ""}`} />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* A seção ocupa a tela inteira (mobile e desktop) e centraliza o conteúdo */
+  .booking-cta {
+    position: relative;
+    overflow: hidden;
+    min-height: 70vh;
+    min-height: 70svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(3rem, 7vw, 5rem) 1.5rem;
+    text-align: center;
+    background:
+      radial-gradient(120% 120% at 50% 0%, var(--color-beige-light) 0%, transparent 55%),
+      linear-gradient(160deg, #f7f1ea 0%, #f2e9df 45%, #ece0d2 100%);
+  }
+
+  /* Textura de ruído sutil sobre o fundo */
+  .booking-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='bookingNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23bookingNoise)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+  }
+
+  .booking-cta__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 42rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── Eyebrow / tag ── */
+  .booking-cta__eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background-color: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(203, 180, 165, 0.6);
+    padding: 0.5rem 1.35rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 10px rgba(203, 180, 165, 0.18);
+    margin-bottom: 1.75rem;
+  }
+
+  .booking-cta__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+  }
+
+  /* ── Divisor ornamental ── */
+  .booking-cta__ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    color: var(--color-accent);
+  }
+  .booking-cta__ornament span {
+    width: 38px;
+    height: 1px;
+    background-color: var(--color-accent);
+    opacity: 0.6;
+  }
+
+  .booking-cta__text {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.6vw, 1.0625rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-top: 1.5rem;
+  }
+  .booking-cta__text span {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  /* ── Botão + card ── */
+  .booking-cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.25rem;
+    margin-top: 2.25rem;
+  }
+
+  /* ── Card de vidro rotativo ── */
+  .booking-cta__glass {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    width: 100%;
+    max-width: 19rem;
+    padding: 1.25rem 1.6rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+      0 8px 32px rgba(188, 159, 143, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .booking-cta__slides {
+    position: relative;
+    flex: 1;
+    min-width: 12rem;
+    height: 3rem;
+  }
+  .booking-cta__slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.3rem;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+    pointer-events: none;
+  }
+  .booking-cta__slide.is-active {
+    opacity: 1;
+    transform: none;
+  }
+  .booking-cta__info-label {
+    font-family: var(--font-body);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .booking-cta__info-value {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  /* Desktop: botão e card lado a lado, card mais compacto */
+  @media (min-width: 768px) {
+    .booking-cta__actions {
+      flex-direction: row;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .booking-cta__glass {
+      width: auto;
+      max-width: none;
+      gap: 0.9rem;
+      padding: 0.6rem 1.3rem;
+      border-radius: 12px;
+    }
+    .booking-cta__slides {
+      min-width: 11rem;
+      height: 2.1rem;
+    }
+    .booking-cta__info-value {
+      font-size: 0.8125rem;
+      white-space: nowrap;
+    }
+    .booking-cta__dot.is-active {
+      height: 10px;
+    }
+  }
+
+  /* Indicadores — coluna vertical à esquerda */
+  .booking-cta__dots {
+    order: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .booking-cta__dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 9999px;
+    background-color: var(--color-accent);
+    opacity: 0.3;
+    transition:
+      opacity 0.4s ease,
+      height 0.4s ease;
+  }
+  .booking-cta__dot.is-active {
+    opacity: 1;
+    height: 12px;
+  }
+
+  /* ── Scroll reveal ── */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Respeita preferência de movimento reduzido */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var el = document.querySelector(".booking-cta [data-reveal]");
+    if (!el) return;
+
+    if (!("IntersectionObserver" in window)) {
+      el.classList.add("is-visible");
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+  })();
+
+  /* Rotação automática do card de vidro */
+  (function () {
+    var slides = Array.prototype.slice.call(
+      document.querySelectorAll(".booking-cta__slide")
+    );
+    var dots = Array.prototype.slice.call(
+      document.querySelectorAll(".booking-cta__dot")
+    );
+    if (slides.length < 2) return;
+
+    var reduce =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    var current = 0;
+    setInterval(function () {
+      slides[current].classList.remove("is-active");
+      if (dots[current]) dots[current].classList.remove("is-active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("is-active");
+      if (dots[current]) dots[current].classList.add("is-active");
+    }, 2800);
+  })();
+</script>
